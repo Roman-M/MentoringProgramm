@@ -35,7 +35,7 @@ namespace UnitTests
 		public void ConstructorTest()
 		{
 			ISet<string> sets = new Set<string>();
-			Assert.IsNotNull(sets);
+			Assert.IsNotNull(sets.Count);
 		}
 
 		#region Additional test attributes
@@ -121,7 +121,7 @@ namespace UnitTests
 		{
 			ISet<string> sets = new Set<string>();
 			sets.Add("item1");
-			sets.Add("item22", i=>i.Length != 5);
+			sets.Add("item22", (i,j) => i.Length == j.Length);
 			Assert.AreEqual(2, sets.Count);
 		}
 
@@ -130,7 +130,7 @@ namespace UnitTests
 		{
 			ISet<string> sets = new Set<string>();
 			sets.Add("item1");
-			sets.Add("item2",i=>i.Length != 4);
+			sets.Add("item2", (i, j) => i.Length == j.Length);
 			Assert.AreEqual(1, sets.Count);
 		}
 
