@@ -34,10 +34,14 @@ namespace ClassLibrary
 				sets.Add(item);
 		}
 
-		public void Add(T item, Predicate<T> match)
+		public void Add(T item, Func<T,T,bool> match)
 		{
-			if (Exists(match) == false) 
-				sets.Add(item);
+			for (int i = 0; i < this.Count; i++)
+			{
+				if (match(this.Items[i], item) == true)
+					return;
+			}
+			sets.Add(item);
 		}
 
 		public void Delete(T item)
@@ -53,7 +57,7 @@ namespace ClassLibrary
 
 		public bool Exists(T item)
 		{
-			for(int i=0;i<this.Count;i++)
+			for(int i = 0; i < this.Count; i++)
 			{
 				if (this.Items[i].Equals(item))
 					return true;

@@ -6,7 +6,7 @@ namespace ClassLibrary
 	{
 		// Methods
 		void Add(T item);
-		void Add(T item, Predicate<T> match);
+		void Add(T item, Func<T,T,bool> match);
 		void Delete(T item);
 		void Clear();
 		bool Exists(T item);
