@@ -1,5 +1,6 @@
 ﻿using ClassLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace UnitTests
 {
@@ -86,12 +87,20 @@ namespace UnitTests
 		}
 
 		[TestMethod]
-		public void ItemsTest()
+		public void ItemsPositiveTest()
+		{
+			ISet<string> sets = new Set<string>();
+			sets.Add("item1");			
+			Assert.ReferenceEquals("item1",sets[0]);
+		}
+
+		[TestMethod]
+		[ExpectedException(typeof(ArgumentOutOfRangeException))]
+		public void ItemsNegativeTest()
 		{
 			ISet<string> sets = new Set<string>();
 			sets.Add("item1");
-			sets.Add("item2");
-			Assert.ReferenceEquals(new string[2]{"item1","item2"},sets.Items);
+			string item = sets[1];
 		}
 
 		#endregion
@@ -108,12 +117,12 @@ namespace UnitTests
 		}
 
 		[TestMethod]
+		[ExpectedException(typeof(ArgumentException))]
 		public void AddNegativeTest()
 		{
 			ISet<string> sets = new Set<string>();
 			sets.Add("item1");
 			sets.Add("item1");
-			Assert.AreEqual(1, sets.Count);
 		}
 
 		[TestMethod]
@@ -126,12 +135,12 @@ namespace UnitTests
 		}
 
 		[TestMethod]
+		[ExpectedException(typeof(ArgumentException))]
 		public void AddWithDelegateNegativeTest()
 		{
 			ISet<string> sets = new Set<string>();
 			sets.Add("item1");
-			sets.Add("item2", (i, j) => i.Length == j.Length);
-			Assert.AreEqual(1, sets.Count);
+			sets.Add("item2", (i, j) => i.Length == j.Length);	
 		}
 
 		[TestMethod]

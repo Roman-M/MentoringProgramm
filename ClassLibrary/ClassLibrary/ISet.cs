@@ -12,7 +12,7 @@ namespace ClassLibrary
 		bool Exists(T item);
 		bool Exists(Predicate<T> match);
 		// Properties
-		T[] Items { get; }
+		T this[int index] { get; }
 		bool IsEmpty { get; }
 		int Count { get; }
 	}
