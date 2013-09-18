@@ -64,11 +64,19 @@ namespace UnitTests
 		#region Tests for properties
 
 		[TestMethod]
-		public void CountTest()
+		public void CountWhenNonEmptyTest()
 		{
 			ISet<string> sets = new Set<string>();
 			sets.Add("item1");
-			Assert.AreEqual(1, sets.Count);
+			sets.Add("item2");
+			Assert.AreEqual(2, sets.Count);
+		}
+
+		[TestMethod]
+		public void CountWhenEmptyTest()
+		{
+			ISet<string> sets = new Set<string>();
+			Assert.AreEqual(0, sets.Count);
 		}
 
 		[TestMethod]
@@ -79,7 +87,7 @@ namespace UnitTests
 		}
 
 		[TestMethod]
-		public void IsEmptyNegasativeTest()
+		public void IsEmptyNegativeTest()
 		{
 			ISet<string> sets = new Set<string>();
 			sets.Add("item1");
@@ -96,11 +104,20 @@ namespace UnitTests
 
 		[TestMethod]
 		[ExpectedException(typeof(ArgumentOutOfRangeException))]
-		public void ItemsNegativeTest()
+		public void ItemsWnenIndexBiggerThenAmountTest()
 		{
 			ISet<string> sets = new Set<string>();
 			sets.Add("item1");
 			string item = sets[1];
+		}
+
+		[TestMethod]
+		[ExpectedException(typeof(ArgumentOutOfRangeException))]
+		public void ItemsWnenIndexLessThenZeroTest()
+		{
+			ISet<string> sets = new Set<string>();
+			sets.Add("item1");
+			string item = sets[-1];
 		}
 
 		#endregion

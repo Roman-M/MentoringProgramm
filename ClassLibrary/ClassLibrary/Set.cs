@@ -6,11 +6,11 @@ namespace ClassLibrary
 {
 	public class Set<T> : ISet<T>
 	{
-		private readonly List<T> sets;
+		private readonly List<T> underlyingList;
 
 		public int Count
 		{
-			get { return sets.Count; }
+			get { return underlyingList.Count; }
 		}
 
 		public T this[int index]
@@ -18,7 +18,7 @@ namespace ClassLibrary
 			get 
 			{
 				if (index >= 0 && index < Count)
-					return sets[index];
+					return underlyingList[index];
 				else
 					throw new ArgumentOutOfRangeException();
 			}
@@ -26,12 +26,12 @@ namespace ClassLibrary
 
 		public bool IsEmpty
 		{
-			get { return sets != null && this.Count != 0 ? false : true; }
+			get { return this.Count == 0 ? true : false; }
 		}
 
 		public Set()
 		{
-			sets = new List<T>();
+			underlyingList = new List<T>();
 		}
 
 		public void Add(T item)
@@ -43,21 +43,21 @@ namespace ClassLibrary
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				if (match(this[i], item) == true)
+				if (match(this[i], item))
 					throw new ArgumentException("The same element is already exists in this collection.");
 			}
-			sets.Add(item);
+			underlyingList.Add(item);
 		}
 
 		public void Delete(T item)
 		{
-			if (Exists(item) == true)
-				sets.Remove(item); 
+			if (Exists(item))
+				underlyingList.Remove(item); 
 		}
 
 		public void Clear()
 		{
-			sets.Clear();
+			underlyingList.Clear();
 		}
 
 		public bool Exists(T item)
@@ -65,11 +65,11 @@ namespace ClassLibrary
 			return Exists((e) => e.Equals(item));
 		}
 
-		public bool Exists(Predicate<T> obj)
+		public bool Exists(Predicate<T> match)
 		{
 			for (int i = 0; i < this.Count; i++)
 			{
-				if (obj(this[i]) == true)
+				if (match(this[i]))
 					return true;
 			}
 			return false;
