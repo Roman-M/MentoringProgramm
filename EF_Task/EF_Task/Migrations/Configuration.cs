@@ -14,7 +14,7 @@ namespace EF_Task.Migrations
 
         protected override void Seed(EF_Task.Context context)
         {
-
+            
         }
     }
 }

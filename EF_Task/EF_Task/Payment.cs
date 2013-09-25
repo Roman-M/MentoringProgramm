@@ -12,10 +12,10 @@ namespace EF_Task
 
 		public DateTime Date { get; set; }
 
-		//public int  ClientID { get; set; }
+		public int ClientID { get; set; }
 
 		public virtual Good Good { get; set; }
 
-		//public virtual Client Client { get; set; }
+		public virtual Client Client { get; set; }
 	}
 }

@@ -46,18 +46,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BankCard.cs" />
+    <Compile Include="CashPayment.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Context.cs" />
+    <Compile Include="ExpiryDate.cs" />
     <Compile Include="Good.cs" />
-    <Compile Include="Migrations\201309191259323_Initial.cs" />
-    <Compile Include="Migrations\201309191259323_Initial.Designer.cs">
-      <DependentUpon>201309191259323_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201309250935068_Initial.cs" />
+    <Compile Include="Migrations\201309250935068_Initial.Designer.cs">
+      <DependentUpon>201309250935068_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309251333285_AddClient.cs" />
+    <Compile Include="Migrations\201309251333285_AddClient.Designer.cs">
+      <DependentUpon>201309251333285_AddClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309251340493_AddPaymentTypes.cs" />
+    <Compile Include="Migrations\201309251340493_AddPaymentTypes.Designer.cs">
+      <DependentUpon>201309251340493_AddPaymentTypes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Payment.cs" />
+    <Compile Include="PayPal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebMoney.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -66,8 +79,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201309191259323_Initial.resx">
-      <DependentUpon>201309191259323_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201309250935068_Initial.resx">
+      <DependentUpon>201309250935068_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309251333285_AddClient.resx">
+      <DependentUpon>201309251333285_AddClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309251340493_AddPaymentTypes.resx">
+      <DependentUpon>201309251340493_AddPaymentTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace EF_Task
 {
@@ -9,10 +10,11 @@ namespace EF_Task
 		public DbSet<Payment> Payments { get; set; }
 		public DbSet<Good> Goods { get; set; }
 		public DbSet<Category> Categories { get; set; }
-		//public DbSet<Client> Clients { get; set; }
-
+		public DbSet<Client> Clients { get; set; }
+		
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
+			// Initial
 			modelBuilder.Entity<Good>()
 				.HasKey(t => t.ID)
 				.Property(t => t.ID)
@@ -66,22 +68,35 @@ namespace EF_Task
 					m.ToTable("Structure");
 				});
 
-			//modelBuilder.Entity<Client>()
-			//	.Property(t => t.Login)
-			//	.HasMaxLength(50);
+			// Add client 
+			modelBuilder.Entity<Client>()
+				.HasKey(t => t.ID)
+				.Property(t => t.Login)
+				.HasMaxLength(50);
 
-			//modelBuilder.Entity<Client>()
-			//	.Property(t => t.FIO)
-			//	.HasMaxLength(100);
+			modelBuilder.Entity<Client>()
+				.Property(t => t.FIO)
+				.HasMaxLength(100);
 
-			//modelBuilder.Entity<Payment>()
-			//	.Property(t => t.ClientID)
-			//	.HasColumnName("Client")
-			//	.IsRequired();
+			modelBuilder.Entity<Payment>()
+				.Property(t => t.ClientID)
+				.HasColumnName("Client");
 
-			//modelBuilder.Entity<Payment>()
-			//	.HasRequired(t => t.Client)
-			//	.WithRequiredPrincipal(t => t.Payment);
+			modelBuilder.Entity<Payment>()
+				.HasRequired(t => t.Client)
+				.WithMany(t => t.Payments)
+				.HasForeignKey(t => t.ClientID);
+
+			// Add payment types 
+			modelBuilder.Entity<Payment>()
+				.Map<CashPayment>(m => m.Requires("Type")
+					.HasValue("Cash"))
+				.Map<BankCard>(m => m.Requires("Type")
+					.HasValue("BankCard"))
+				.Map<WebMoney>(m => m.Requires("Type")
+					.HasValue("WebMoney"))
+				.Map<PayPal>(m => m.Requires("Type")
+					.HasValue("PayPal")); 
 
 			base.OnModelCreating(modelBuilder);
 		}

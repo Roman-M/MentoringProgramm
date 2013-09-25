@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace EF_Task
 {
@@ -14,6 +10,6 @@ namespace EF_Task
 
 		public string FIO { get; set; }
 
-		public Payment Payment { get; set; }
+		public virtual ICollection<Payment> Payments { get; set; }
 	}
 }
